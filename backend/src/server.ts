@@ -26,7 +26,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 
 // POST
 app.post('/api/memory', (req: Request, res: Response, next: NextFunction) => {
-  const { memory }: { memory: number } = req.body;
+  const { memory }: { memory: string } = req.body;
   writeFile(dbFilePath, memory.toString(), (err) => {
     if (err) {
       return next(err);
@@ -41,15 +41,13 @@ app.post('/api/memory', (req: Request, res: Response, next: NextFunction) => {
 
 // GET
 app.get('/api/memory', (_req: Request, res: Response, next: NextFunction) => {
-  let memory: number;
   readFile(dbFilePath, 'utf8', (err, data) => {
     if (err) {
       return next(err);
     }
-    memory = parseInt(data);
     res.json({
       message: "get memory",
-      data: memory
+      data
     });
   });
 });
