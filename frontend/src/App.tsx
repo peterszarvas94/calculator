@@ -3,6 +3,7 @@ import { useReducer } from 'react';
 import Button from './components/Button';
 import { formatNumber } from './functions/formatNumber';
 import { reducer } from './functions/reducer';
+import { AiFillGithub } from 'react-icons/ai';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       current: '',
       previous: '',
       operation: '',
+      overwrite: false
     }
   );
 
@@ -68,30 +70,46 @@ function App() {
     return formatted;
   }
 
+  function renderCalculation(num?: string, op?: string) {
+    if (!num || !op) {
+      return '';
+    }
+    return `${renderDisplay(num)} ${op}`;
+  }
+
   return (
-    <main className="bg-sky-200 h-screen w-screen pt-10">
+    <main className="bg-gradient-to-br from-sky-300 to-emerald-200 h-screen w-screen pt-10">
       <div className="
         w-fit h-fit mx-auto grid grid-cols-4 grid-rows-5 
         divide-x divide-y divide-gray-200
-        rounded-2xl shadow-lg text-xl
+        rounded-2xl shadow-lg
       ">
-        <input
-          type="text"
-          className="w-64 h-16 col-span-4 text-right px-4 rounded-t-2xl bg-gray-800 text-white font-mono"
-          value={renderDisplay(current)}
-          readOnly
-          maxLength={10}
-        />
+        <div className="w-64 h-16 col-span-4 ">
+
+          <div
+            className="
+              w-64 h-7 text-right px-4 rounded-t-2xl bg-gray-800 text-gray-400 font-mono
+              flex items-center justify-end
+            "
+          >
+            {renderCalculation(previous, operation)}
+          </div>
+          <div
+            className="w-64 h-9 text-right text-lg px-4 bg-gray-800 text-white font-mono"
+          >
+            {renderDisplay(current)}
+          </div>
+        </div>
 
         <Button
           bg="bg-gray-100"
-          onClick={() => { alert(queryData.data) }}
+          onClick={() => { dispatch({ type: 'memory-read', payload: { value: queryData.data } }) }}
         >
           MR
         </Button>
         <Button
           bg="bg-gray-100"
-          onClick={() => mutate({ memory: '42' })}
+          onClick={() => mutate({ memory: current })}
         >
           MW
         </Button>
@@ -142,7 +160,7 @@ function App() {
           rounded="rounded-bl-2xl"
           onClick={() => dispatch({ type: 'clear' })}
         >
-          C
+          AC
         </Button>
         <Button onClick={() => dispatch({ type: 'add-digit', payload: { digit: '0' } })} >0</Button>
         <Button onClick={() => dispatch({ type: 'add-digit', payload: { digit: '.' } })} >&#x2022;</Button>
@@ -153,6 +171,39 @@ function App() {
         >
           =
         </Button>
+      </div>
+
+      <div className="pt-10 w-64 mx-auto">
+        <div>Current memory:</div>
+        <div className="font-mono">{renderDisplay(queryData.data)}</div>
+      </div>
+
+      <div className="pt-10 w-64 mx-auto text-sm font-mono">
+        <div>MR - Memory Read</div>
+        <div>MW - Memory Write </div>
+        <div>MC - Memory Clear</div>
+        <div>AC - All Clear</div>
+      </div>
+
+      <div className="pt-10 w-64 mx-auto text-xs text-gray-500">
+        <div>All rights reserved</div>
+        <div>&copy; 2023 Péter Szarvas</div>
+        <a
+          href="https://peterszarvas.hu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block hover:underline"
+        >
+          peterszarvas.hu
+        </a>
+        <a
+          href="https://github.com/peterszarvas94/calculator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block hover:underline"
+        >
+          <AiFillGithub className="inline" /> check it on GitHub
+        </a>
       </div>
     </main >
   )

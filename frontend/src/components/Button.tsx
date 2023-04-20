@@ -12,7 +12,7 @@ function Button({ children, rounded, bg, onClick }: Props) {
     <button
       onClick={() => onClick()}
       className={`
-        w-16 h-16 active:shadow-button 
+        w-16 h-16 text-xl active:shadow-button 
         ${bg ?? "bg-white"}
         ${rounded ?? ""}
      `}
