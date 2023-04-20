@@ -7,7 +7,7 @@
     "watch": "tsc -w --outDir dist",
     "dev": "nodemon dist/server.js",
     "run": "ts-node src/server.ts",
-    "build": "tsc src/server.ts --outDir build",
+    "build": "tsc --outDir build",
     "start": "node build/server.js"
   },
   "keywords": [],

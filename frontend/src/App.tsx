@@ -200,9 +200,10 @@ function App() {
           href="https://github.com/peterszarvas94/calculator"
           target="_blank"
           rel="noopener noreferrer"
-          className="block hover:underline"
+          className="hover:underline flex items-center justify-start gap-1"
         >
-          <AiFillGithub className="inline" /> check it on GitHub
+          <AiFillGithub className="inline" />
+          <span>GitHub</span>
         </a>
       </div>
     </main >
