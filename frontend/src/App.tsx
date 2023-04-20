@@ -1,5 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+function Button({ children, rounded, bg }: {
+  children: React.ReactNode,
+  rounded?: string,
+  bg?: string
+}) {
+  return (
+    <button onClick={() => { }} className={`
+      w-16 h-16 
+      ${bg ?? "bg-white"}
+      ${rounded ?? ""}
+    `}>
+      {children}
+    </button>
+  )
+}
+
 function App() {
 
   const queryClient = useQueryClient();
@@ -68,12 +84,42 @@ function App() {
   }
 
   return (
-    <div className="text-red-400">
-      <form onSubmit={(e) => submitForm(e)}>
-        <input type="number" name="memory" />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <main className="bg-sky-200 h-screen w-screen pt-10">
+      <div className="
+        w-fit h-fit mx-auto grid grid-cols-4 grid-rows-5 
+        divide-x divide-y divide-gray-200
+        rounded-2xl shadow-lg text-xl
+      ">
+        <input type="text" className="
+          w-64 h-16 col-span-4 text-right px-4 rounded-t-2xl
+          bg-gray-800 text-white font-mono
+        "/>
+        <Button bg="bg-gray-100">MR</Button>
+        <Button bg="bg-gray-100">MW</Button>
+        <Button bg="bg-gray-100">MC</Button>
+        <Button bg="bg-gray-600 text-white">&divide;</Button>
+
+        <Button>7</Button>
+        <Button>8</Button>
+        <Button>9</Button>
+        <Button bg="bg-gray-600 text-white">&times;</Button>
+
+        <Button>4</Button>
+        <Button>5</Button>
+        <Button>6</Button>
+        <Button bg="bg-gray-600 text-white">&ndash;</Button>
+
+        <Button>1</Button>
+        <Button>2</Button>
+        <Button>3</Button>
+        <Button bg="bg-gray-600 text-white">+</Button>
+
+        <Button rounded="rounded-bl-2xl">C</Button>
+        <Button>0</Button>
+        <Button>&#x2022;</Button>
+        <Button rounded="rounded-br-2xl" bg="bg-orange-600 text-white">=</Button>
+      </div>
+    </main >
   )
 }
 
