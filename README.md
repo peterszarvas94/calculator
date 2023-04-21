@@ -2,6 +2,8 @@
 
 Simple calculator, unsing Express.js as the backend, and React as the frontend.
 
+![Screenshot](https://github.com/peterszarvas94/calculator/blob/main/screenshot.png)
+
 To run the backend server:
 
 ```
