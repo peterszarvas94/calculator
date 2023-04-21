@@ -41,7 +41,6 @@ function App() {
   }
 
   if (mutationSuccess) {
-    console.log("mutation data", mutationSuccess);
     queryClient.invalidateQueries(['memory']);
   }
 
