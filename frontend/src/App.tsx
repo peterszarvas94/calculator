@@ -5,6 +5,8 @@ import { formatNumber } from './functions/formatNumber';
 import { reducer } from './functions/reducer';
 import { AiFillGithub } from 'react-icons/ai';
 
+const server = import.meta.env.VITE_BACKEND || 'http://localhost:4000';
+
 function App() {
 
   const queryClient = useQueryClient();
@@ -21,7 +23,7 @@ function App() {
   // set the memory on the server
   const { mutate, isError: mutationError, isSuccess: mutationSuccess } = useMutation({
     mutationFn: async ({ memory }: { memory: string }) => {
-      const res = await fetch('http://localhost:3000/api/memory', {
+      const res = await fetch(`${server}/api/memory`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +50,7 @@ function App() {
   const { isLoading: queryLoading, data: queryData, isError: queryError } = useQuery<{ message: string, data: string }>({
     queryKey: ['memory'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3000/api/memory');
+      const res = await fetch(`${server}/api/memory`);
       if (!res.ok) {
         throw new Error('Network response was not ok');
       }
